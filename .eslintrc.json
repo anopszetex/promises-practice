@@ -10,6 +10,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "ignorePatterns": ["**/__mocks__/**", "node_modules/**", "dist/**"],
     "rules": {
        "semi": ["error", "never"]
     }
