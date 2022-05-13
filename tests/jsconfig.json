@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "module": "es2015",
+    "lib": ["es6"],
+    "baseUrl": "../",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
