@@ -13,12 +13,34 @@ describe('Promise', () => {
   })
 
   describe('When fulfilled', () => {
-    test.only('should then a Promise', async () => {
+    test('should then a Promise', async () => {
       const promise = new NPromise(resolve => resolve({ data: 'fake' }))
 
       await expect(promise)
       .resolves
       .toEqual({ data: 'fake' })
     })
+
+    test('should call then just when the async code is resolved', async () => {
+      const promise = new NPromise(resolve => {
+        setTimeout(() => resolve({ data: 'fake'}), 1e2)
+      })
+
+      await expect(promise)
+      .resolves
+      .toEqual({data: 'fake'})
+    })
+
+    test('should allow the same promise to be thenable multiple times', async () => {
+      const p1 = new NPromise(resolve => setTimeout(() => resolve({ data: 'fake' }), 10))
+      
+      p1
+      .then(res => expect(res.data).toBe('fake'))
+
+      await expect(p1)
+      .resolves
+      .toEqual({ data: 'fake' })
+    })
+
   })
 })
