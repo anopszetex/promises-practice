@@ -20,7 +20,16 @@ class NPromise {
 
   then (onFulFill) {
     return new NPromise(resolve => {
-      resolve(onFulFill(this.value))
+      const onFulfilled = res => {
+        resolve(onFulFill(res))
+      }
+
+      if (this.state !== STATE.FULFILLED) {
+        this.onFulFillChain.push(onFulfilled)
+        return
+      }
+
+      onFulfilled(this.value)
     })
   }
 
@@ -31,6 +40,10 @@ class NPromise {
 
     this.state = STATE.FULFILLED
     this.value = res
+
+    for (const onFullfilled of this.onFulFillChain) {
+      onFullfilled(this.value)
+    }
   }
 }
 
