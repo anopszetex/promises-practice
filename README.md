@@ -1,4 +1,4 @@
-# Promises Async I/O, Callbacks e Event Loop
+# Promises Async I/O, Callbacks and Event Loop
 
 An application to understand promises and how it work under the hood, <br>
 Also remake and simulate Promises.
